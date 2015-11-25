@@ -17,14 +17,15 @@ Description of the main directories:
 * MATLAB: contains the MATLAB function `quadeig`. By default, it uses the
   [NAG Toolbox for MATLAB] if available (http://www.nag.co.uk/numeric/MB/start.asp).
 
-* dg3evx: this directory contains double-precision Fortran 90 files.
-  The driver subroutine is `dg3evx`. The other Fortran files are auxiliary
-  subroutines. The LAPACK and BLAS libraries are required to run `dg3evx`.
+* dg3evx: this directory contains double-precision Fortran 90 files for real
+  quadratic eigenvalue problems. The driver subroutine is `dg3evx`. The other
+  Fortran files are auxiliary subroutines. The LAPACK and BLAS libraries are
+  required to run `dg3evx`.
 
-* zg3evx: this directory contains Fortran 90 files for complex quadratic
-  eigenvalue problems. The main subroutine is `zg3evx`. The other Fortran files
-  are auxiliary subroutines. The LAPACK and BLAS libraries are required to run
-  `zg3evx`.
+* zg3evx: this directory contains double-precision complex Fortran 90 files for
+  complex quadratic eigenvalue problems. The main subroutine is `zg3evx`. The
+  other Fortran files are auxiliary subroutines. The LAPACK and BLAS libraries
+  are required to run `zg3evx`.
 
 * Octave: contains the Octave function `quadeig_o`.
 
