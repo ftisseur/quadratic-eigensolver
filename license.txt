@@ -1,9 +1,8 @@
 Licencing
 ---------
 
-quadeig.m is a freely-available MATLAB m-file.
-When referencing quadeig we would ask that you cite the following
-publication:
+When referencing our quadratic eigensolver we would ask that you cite the
+following publication:
 
 S. Hammarling, C. J. Munro and F. Tisseur.  An algorithm for the
 complete solution of quadratic eigenvalue problems.  ACM
