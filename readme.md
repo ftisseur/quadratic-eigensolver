@@ -8,14 +8,15 @@ Fortran routines for the numerical solution of quadratic eigenvalue problems
 based on the algorithm in the paper:
 
 S. Hammarling, C. J. Munro and F. Tisseur, "[An algorithm for the
-complete solution of quadratic eigenvalue problems]"
-(http://eprints.ma.man.ac.uk/1730/01/covered/MIMS_ep2011_86_MATLAB_M-file.pdf)
+complete solution of quadratic eigenvalue problems]
+(http://eprints.ma.man.ac.uk/2061/)",
 ACM Trans. Math. Software, 39(3):18:1-18:19, 2013.
 
 Description of the main directories:
 
 * MATLAB: contains the MATLAB function `quadeig`. By default, it uses the
-  [NAG Toolbox for MATLAB] if available (http://www.nag.co.uk/numeric/MB/start.asp).
+  [NAG Toolbox for MATLAB] if available
+  (http://www.nag.co.uk/numeric/MB/start.asp).
 
 * dg3evx: this directory contains double-precision Fortran 90 files for real
   quadratic eigenvalue problems. The driver subroutine is `dg3evx`. The other
