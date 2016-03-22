@@ -24,8 +24,9 @@ SUBROUTINE ZLAQP3( m, n, nA, A, ldA, jpvtA, tauA, rankA, tol, INFO )
 !         Constraint: n >= 0.
 
 ! nA    - (input) REAL(KIND=wp)
-!         On entry: the norm of the matrix A.  If nA is zero then the matrix A
-!                   is taken to be the zero matrix.
+!         On entry: usually the norm of the matrix A, but may be the norm of a
+!                   matrix containing A, see the argument tol below.  If nA is
+!                   zero then the matrix A is taken to be the zero matrix.
 
 ! A     - (input/output) COMPLEX(KIND=wp) array, dimension (ldA,*)
 !         Note: the second dimension of the array A must be at
@@ -56,10 +57,12 @@ SUBROUTINE ZLAQP3( m, n, nA, A, ldA, jpvtA, tauA, rankA, tol, INFO )
 !                  ABS( r(j,j) ) <= tol.
 
 ! tol   - (input) REAL(kind=wp)
-!         On entry: the tolerance for determining the rank of the matrix A is
-!                   tol*nA. If tol <= zero, then n*eps is used in place of tol,
+!         On entry: the tolerance for determining the rank of the matrix A.
+!                   If tol = zero, then n*eps*nA is used in place of tol,
 !                   where eps is the machine precision as returned by routine
-!                   call DLAMCH( 'E' ).
+!                   call DLAMCH( 'E' ).  Note that if  tol < zero  then
+!                   rankA will be returned as n irrespective of the size of the
+!                   elements of R.
 
 ! INFO  - (output) INTEGER 
 !         On exit: INFO=0 unless the routine detects an error.
@@ -110,11 +113,10 @@ k = MIN(m,n)
 rankA = 0
 IF( nA /= ZERO )THEN
    loctol = tol
-   IF( loctol <= ZERO )THEN
+   IF( loctol == ZERO )THEN
       eps = DLAMCH( 'E' )
-      loctol = n*eps
+      loctol = n*eps*nA
    END IF
-   loctol = loctol*nA
    jpvtA(1:n) = 0
 
    lwork = -1
@@ -139,6 +141,9 @@ IF( nA /= ZERO )THEN
 ELSE
    jpvtA(1:n) = (/ (j, j = 1, n) /)
    tauA(1:k) = CZERO
+   IF( tol < ZERO )THEN
+      rankA = n
+   END IF
 END IF
 
 RETURN
