@@ -24,8 +24,9 @@ SUBROUTINE DLAQP3( m, n, nA, A, ldA, jpvtA, tauA, rankA, tol, INFO )
 !         Constraint: n >= 0.
 
 ! nA    - (input) REAL(KIND=wp)
-!         On entry: the norm of the matrix A.  If nA is zero then the matrix A
-!                   is taken to be the zero matrix.
+!         On entry: usually the norm of the matrix A, but may be the norm of a
+!                   matrix containing A, see the argument tol below.  If nA is
+!                   zero then the matrix A is taken to be the zero matrix.
 
 ! A     - (input/output) REAL(KIND=wp) array, dimension (ldA,*)
 !         Note: the second dimension of the array A must be at

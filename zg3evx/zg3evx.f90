@@ -313,9 +313,10 @@ SUBROUTINE ZG3EVX( scal, jobVL, jobVR, sense, tol, n,                          &
        LOGICAL, EXTERNAL                 :: ZSELCT
 !      .. External Subroutines ..
        EXTERNAL                             XERBLA, ZGEMM, ZGGES, ZGGEV,       &
-                                            ZLACPY, ZLAG3V, ZLANAB, ZLAQP3,    &
-                                            ZLASGE, ZSWAP, ZTGEVC, ZTRSM,      &
-                                            ZTZRZF, ZUNGQR, ZUNMQR, ZUNMRZ
+                                            ZLACPY, ZLAG3B, ZLAG3V, ZLANAB,    &
+                                            ZLAQP3, ZLASGE, ZSWAP, ZTGEVC,     &
+                                            ZTRSM,  ZTZRZF, ZUNGQR, ZUNMQR,    &
+                                            ZUNMRZ
 !      .. Intrinsic Functions ..
        INTRINSIC                            ABS, CONJG, DOT_PRODUCT, MAX,      &
                                             REAL, SQRT, TRANSPOSE

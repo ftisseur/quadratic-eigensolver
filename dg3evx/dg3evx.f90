@@ -254,8 +254,7 @@ SUBROUTINE DG3EVX( scal, jobVL, jobVR, sense, tol, n,                          &
 
 ! If the problem is heavily damped,then the algorithm is backward stable for
 ! the larger eigenvalues when  scal = 3  is used, and is backward stable for the
-! smaller eigenvalues when  scal = 4  is used.  For complete stability, the
-! algorithm should be called twice.
+! smaller eigenvalues when  scal = 4  is used.
 
 ! Further details on the algorithm are given in Reference 3.
 
@@ -326,10 +325,10 @@ SUBROUTINE DG3EVX( scal, jobVL, jobVR, sense, tol, n,                          &
        REAL (KIND=wp), EXTERNAL       :: DLAMCH, DLANGE, DNRM2
        LOGICAL, EXTERNAL              :: DSELCT
 !      .. External Subroutines ..
-       EXTERNAL                          DGEMM, DGGES, DGGEV, DLACPY, DLAG3V,  &
-                                         DLANAB, DLAQP3, DLASGE, DORGQR,       &
-                                         DORMQR, DORMRZ, DSWAP, DTGEVC, DTRSM, &
-                                         DTZRZF, XERBLA, ZGEMM
+       EXTERNAL                          DGEMM, DGGES, DGGEV, DLACPY, DLAG3B,  &
+                                         DLAG3V, DLANAB, DLAQP3, DLASGE,       &
+                                         DORGQR, DORMQR, DORMRZ, DSWAP,        &
+                                         DTGEVC, DTRSM,  DTZRZF, XERBLA, ZGEMM
 !      .. Intrinsic Functions ..
        INTRINSIC                         ABS, CMPLX, CONJG, DOT_PRODUCT,       &
                                          MAX, REAL, SIGN, SQRT, TRANSPOSE
@@ -561,7 +560,7 @@ IF( rev )THEN
    DEALLOCATE( itemp, RTEMP, STAT = iwarn_STAT )
 END IF
 
-ALLOCATE( PA(1:n,1:n), PC(1:n,1:n), QAT(n,n), STAT = iwarn_STAT )
+ALLOCATE( PA(n,n), PC(n,n), QAT(n,n), STAT = iwarn_STAT )
 IF( iwarn_STAT /= 0 )THEN
    INFO = -999
    iwarn = iwarn_STAT
@@ -652,7 +651,7 @@ IF( rankC == n .AND. rankA == n )THEN
 
    ! Form  the orthonormal matrix V = ( PA  0 )
    !                                  (  0  I )
-   V(1:n,1:n) = PA
+   V(1:n,1:n) = PA(1:n,1:n)
    V(n+1:two_n,1:n) = ZERO
    V(1:two_n,n+1:two_n) = ZERO
    DO j = n+1, two_n
@@ -740,7 +739,7 @@ ELSE IF( rankC < rankA .AND. rankA == n )THEN
 
    ! Form the orthonormal matrix  V = ( PA  0  )
    !                                  (  0  QC )
-   V(1:n,1:n) = PA
+   V(1:n,1:n) = PA(1:n,1:n)
    V(n+1:two_n,1:n) = ZERO
    IF( nC /= ZERO )THEN
       V(1:n,n+1:two_n) = ZERO
